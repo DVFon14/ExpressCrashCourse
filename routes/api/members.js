@@ -1,4 +1,5 @@
 const express = require('express')
+const uuid = require('uuid');
 const router = express.Router(); 
 const members = require('../../Members') //const members = require('./Members'); this changes because it's no longer in the js file. We need ../ for routes folder and ../ for api folder
 
@@ -41,7 +42,20 @@ const found = members.some(member => member.id === parseInt(req.params.id));
 
 //CREATE MEMBER
 router.post('/', (req, res) => { // eventhough we use / in line 20, we can use it here because the methods are different
-    res.send(req.body);
+    const newMember = {
+        id: uuid.v4(), //id: uuid.v4() is a random, universal id package we installed 
+        name : req.body.name,
+        email: req.body.email,
+        status: 'active'
+    };
+
+    if(!newMember.name || !newMember.email) {
+        return res.status(400).json({msg: 'Please include a name and email'});
+    }
+
+    members.push(newMember);
+    res.json(members);
+
 });
 
 module.exports = router;

@@ -18,7 +18,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 //MEMBERS API ROUTES
-app.use('/api/members', require('./Routes/api/members'))
+app.use('/api/members', require('./routes/api/members'));
 
 
 const PORT =  process.env.PORT || 8000;
