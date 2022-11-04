@@ -9,7 +9,9 @@ const app = express();
 //init middleware
 //app.use(logger); //this initializes the logger.js file.
 
-
+//BODY PARSER MIDDLEWARE
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
 
 
 //Set a static folder
